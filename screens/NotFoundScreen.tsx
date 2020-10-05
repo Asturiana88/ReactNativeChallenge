@@ -1,40 +1,40 @@
-import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Button, Image } from 'react-native';
+import { Text, View } from '../components/Themed';
 
-import { RootStackParamList } from '../types';
-
-export default function NotFoundScreen({
-  navigation,
-}: StackScreenProps<RootStackParamList, 'NotFound'>) {
+export default function NotFoundScreen(props : {resetSearch:() => void}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>This screen doesn't exist.</Text>
-      <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
-        <Text style={styles.linkText}>Go to home screen!</Text>
-      </TouchableOpacity>
+      <Text style={styles.errorText}>We couldn't find any results for your query...</Text>
+      <View style={styles.buttonContainer}>
+       <Button color='grey' title='Try another search' onPress={props.resetSearch}/>
+      </View>
+      <View style={styles.imgContainer} >
+      <Image style={styles.imgNF} source={{uri: 'https://i.imgflip.com/23h9vq.jpg'}}/>  
+      </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    marginTop:5,
+    padding:35
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  buttonContainer:{
+    marginTop:15,
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
+  errorText:{
+    fontSize:25,
+    fontWeight: "bold"
   },
-  linkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  imgNF:{
+    borderRadius: 30,
+    width: '100%',
+    maxHeight: 400,
+    height:'100%'
   },
+  imgContainer:{
+    marginTop:10,
+    padding:15
+  }
 });
