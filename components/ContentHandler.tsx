@@ -7,8 +7,8 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import { View , Text, ItemContainer, TextInput, Modal} from './Themed';
 
 interface itemInterface{
-    id?: number,
-    name?: string,
+    id: number,
+    name: string,
     type?: string,
     gender?: string,
     species?: string,
@@ -33,7 +33,13 @@ interface ContentProps{
     filter:string
 }
 
-const Item = (props:any) => {
+interface queryOptionsInterface{
+    name: string,
+    type: string,
+    page: number
+}
+
+const Item = (props:{elem: itemInterface, onPress:()=> void}) => {
    const {elem,onPress } = props 
     return (
         <TouchableOpacity onPress={onPress}>
@@ -53,9 +59,9 @@ export default function ContentHandler(props: ContentProps) {
     const [seletedTypeName, setSeletedTypeName] =  useState<"name"|"type">("name")
     const [filter, setFilter] = useState('')
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<itemInterface>({name:''})
+    const [selectedItem, setSelectedItem] = useState<itemInterface>({name:'', id:0})
     const [dataQuery, setDataQuery] = useState<[any?]>([])
-    const [variables, setQueryOptions ] = useState({
+    const [variables, setQueryOptions ] = useState<queryOptionsInterface>({
             name: "",
             type: "",
             page: 1
@@ -68,7 +74,7 @@ export default function ContentHandler(props: ContentProps) {
 
     useEffect(() => {   
         if (filter.length > 2){
-            setQueryOptions((currentState:any) => {
+            setQueryOptions((currentState:queryOptionsInterface) => {
                 return {...currentState, [onSeletedTypeName]:filter, page:1}
             })
             setDataQuery([])
@@ -77,7 +83,6 @@ export default function ContentHandler(props: ContentProps) {
             let itemList : [any?] = data[dataAttib].results
             if (dataQuery !== itemList){
                 setDataQuery(currentData => [...currentData, ...itemList])
-                console.log("a")
             }
         }
     }, [data, filter])
@@ -86,21 +91,27 @@ export default function ContentHandler(props: ContentProps) {
 
     function resetSearch() {
         setFilter('')
-        setQueryOptions((currentState:any) => {
+        setQueryOptions((currentState:queryOptionsInterface) => {
             return {...currentState, [onSeletedTypeName]:'', page:1}
         })
         setDataQuery([])
     }
 
     function handleFilter(text:string) {
-        setFilter(text)  
+        setFilter(text) 
+        if(text === "") {
+            setQueryOptions((currentState:queryOptionsInterface) => {
+                return {...currentState, [onSeletedTypeName]:'', page:1}
+            })
+            setDataQuery([])
+        }
     }
 
     function handleNextPage() {
         if(data && data[dataAttib] && data[dataAttib].info){
             if(data[dataAttib].info.next  !== null){
                 console.log(data[dataAttib].info.next)
-                setQueryOptions((currentState:any) => {
+                setQueryOptions((currentState:queryOptionsInterface) => {
                     return {...currentState, page:data[dataAttib].info.next}
                 })
             }
@@ -111,14 +122,14 @@ export default function ContentHandler(props: ContentProps) {
         setModalVisible(currentState => !currentState)
     }
 
-    function handleSelectedItem(e:any) {
+    function handleSelectedItem(e:itemInterface) {
         setSelectedItem(e)
         handleDetailsItem()
     }
 
     // List Item
     
-    const renderItem = (elem:any) =>{ 
+    const renderItem = (elem:{item:itemInterface}) =>{ 
         return <Item elem={elem.item} onPress={() => handleSelectedItem(elem.item)} />
      }
 
@@ -137,7 +148,7 @@ export default function ContentHandler(props: ContentProps) {
                                 style={styles.flatListContainer}
                                 data={dataQuery}
                                 renderItem={renderItem}
-                                keyExtractor={(item:any) => item.id + item.name}
+                                keyExtractor={(item:itemInterface) => item.id + item.name}
                             />
                     }
                     {loading &&
@@ -164,7 +175,7 @@ export default function ContentHandler(props: ContentProps) {
                             { selectedItem.residents ? 
                             <View style={{width:'100%'}}>
                                 <Text>Characters:</Text>
-                                {selectedItem.residents.map((resident:any, i:number) =>{
+                                {selectedItem.residents.map((resident:{name:string, image:string}, i:number) =>{
                                     if(i < 5){
                                         return (
                                             <ItemContainer key={resident.name + 'residentItem'} style={styles.containerModal}>
@@ -177,7 +188,7 @@ export default function ContentHandler(props: ContentProps) {
                             </View>
                                 :null
                             }
-                            { selectedItem.characters ? selectedItem.characters.map((character:any, i:number) =>{
+                            { selectedItem.characters ? selectedItem.characters.map((character:{name:string, image:string}, i:number) =>{
                                     if(i < 5){
                                         return (
                                             <ItemContainer key={character.name + 'charatcterItem'}  style={styles.containerModal}>
