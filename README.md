@@ -33,21 +33,37 @@ A web browser should open allowing you to test the application directly in your 
 ### Characters
 
 <img alt="character index" width="250" src="./screenshots/characterIndexRN.jpg"/>
+
+
 ---
+
+
 <img alt="character info" width="250" src="./screenshots/characterInfoRN.jpg"/>
+
+
 ---
+
 
 ### Episodes
 
 <img alt="episodes index" width="250" src="./screenshots/EpisodesRN.jpg"/>
+
+
 ---
+
+
 <img alt="episodes info" width="250" src="./screenshots/EpisodeInfoRN.jpg"/>
+
+
 ---
+
 
 ### Locations
 
 <img alt="locations index" width="250" src="./screenshots/locationsRN.jpg"/>
----
-<img alt="locations info" width="250" src="./screenshots/locationInfoRN.jpg"/>
+
+
 ---
 
+
+<img alt="locations info" width="250" src="./screenshots/locationInfoRN.jpg"/>
