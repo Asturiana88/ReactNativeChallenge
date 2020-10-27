@@ -32,16 +32,16 @@ A web browser should open allowing you to test the application directly in your 
 
 ### Characters
 
-<img alt="character index" src="./screens/characterIndexRN.jpg"/>
-<img alt="character info" src="./screens/characterInfoRN.jpg"/>
+<img alt="character index" src="./screenshots/characterIndexRN.jpg"/>
+<img alt="character info" src="./screenshots/characterInfoRN.jpg"/>
 
 ### Episodes
 
-<img alt="episodes index" src="./screens/EpisodesRN.jpg"/>
-<img alt="episodes info" src="./screens/EpisodeInfoRN.jpg"/>
+<img alt="episodes index" src="./screenshots/EpisodesRN.jpg"/>
+<img alt="episodes info" src="./screenshots/EpisodeInfoRN.jpg"/>
 
 ### Locations
 
-<img alt="locations index" src="./screens/locationsRN.jpg"/>
-<img alt="locations info"src="./screens/locationInfoRN.jpg"/>
+<img alt="locations index" src="./screenshots/locationsRN.jpg"/>
+<img alt="locations info"src="./screenshots/locationInfoRN.jpg"/>
 
