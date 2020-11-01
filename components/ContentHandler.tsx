@@ -39,8 +39,8 @@ interface queryOptionsInterface {
     page: number
 }
 
-const Item = (props: { elem: itemInterface, onPress: () => void }) => {
-    const { elem, onPress } = props
+interface itemProps { elem: itemInterface, onPress: () => void }
+const Item = ({ elem, onPress }: itemProps) => {
     return (
         <TouchableOpacity onPress={onPress}>
             <ItemContainer style={styles.itemContainer}>
@@ -52,10 +52,10 @@ const Item = (props: { elem: itemInterface, onPress: () => void }) => {
     )
 }
 
-const ContentHandler = (props: ContentProps) => {
+const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) => {
 
     //Component state
-    const { query, dataAttib, onSeletedTypeName } = props
+
     const [seletedTypeName, setSeletedTypeName] = useState<"name" | "type">("name")
     const [filter, setFilter] = useState<string>('')
     const [modalVisible, setModalVisible] = useState<boolean>(false);

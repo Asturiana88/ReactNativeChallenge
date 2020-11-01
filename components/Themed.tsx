@@ -28,37 +28,32 @@ export type ViewProps = ThemeProps & DefaultView['props'];
 export type TextInputProps = ThemeProps & DefaultTextInput['props'];
 export type ModalProps = ThemeProps & DefaultModal['props'];
 
-export const Text = (props: TextProps) => {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+export const Text = ({ style, lightColor, darkColor, ...otherProps }: TextProps) => {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   return <DefaultText style={[{ color }, style]} {...otherProps} />;
 }
 
-export const TextInput = (props: TextInputProps) => {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+export const TextInput = ({ style, lightColor, darkColor, ...otherProps }: TextInputProps) => {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
   const borderColor = useThemeColor({ light: lightColor, dark: darkColor }, 'borderColor');
 
   return <DefaultTextInput placeholderTextColor={color} style={[{ color, borderColor }, style]} {...otherProps} />;
 }
 
-export const View = (props: ViewProps) => {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+export const View = ({ style, lightColor, darkColor, ...otherProps }: ViewProps) => {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
-export const Modal = (props: ModalProps) => {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+export const Modal = ({ style, lightColor, darkColor, ...otherProps }: ModalProps) => {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
   return <DefaultModal style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
-export const ItemContainer = (props: ViewProps) => {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+export const ItemContainer = ({ style, lightColor, darkColor, ...otherProps }: ViewProps) => {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
   const borderColor = useThemeColor({ light: lightColor, dark: darkColor }, 'borderColor');
 
