@@ -14,7 +14,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-export default function App() {
+const App = () => {
   const colorScheme = useColorScheme();
 
   return (
@@ -24,3 +24,5 @@ export default function App() {
     </ApolloProvider>
   )
 }
+
+export default App;

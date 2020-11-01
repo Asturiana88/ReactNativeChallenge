@@ -12,7 +12,7 @@ import { BottomTabParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-export default function BottomTabNavigator() {
+const BottomTabNavigator = () => {
   const colorScheme = useColorScheme();
 
   return (
@@ -42,3 +42,5 @@ const styles = StyleSheet.create({
     display: "flex",
   }
 })
+
+export default BottomTabNavigator;

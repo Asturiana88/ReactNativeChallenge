@@ -11,7 +11,7 @@ import LandingPage from '../screens/LandingPage'
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+const Navigation = ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
   return (
     <NavigationContainer
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -24,7 +24,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="LandingPage" component={LandingPage} />
@@ -32,3 +32,5 @@ function RootNavigator() {
     </Stack.Navigator>
   );
 }
+
+export default Navigation;

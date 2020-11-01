@@ -4,10 +4,10 @@ import { Text as DefaultText, View as DefaultView, TextInput as DefaultTextInput
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
-export function useThemeColor(
+export const useThemeColor = (
   props: { light?: string; dark?: string },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
-) {
+) => {
   const theme = useColorScheme();
   const colorFromProps = props[theme];
 
@@ -28,14 +28,14 @@ export type ViewProps = ThemeProps & DefaultView['props'];
 export type TextInputProps = ThemeProps & DefaultTextInput['props'];
 export type ModalProps = ThemeProps & DefaultModal['props'];
 
-export function Text(props: TextProps) {
+export const Text = (props: TextProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   return <DefaultText style={[{ color }, style]} {...otherProps} />;
 }
 
-export function TextInput(props: TextInputProps) {
+export const TextInput = (props: TextInputProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
   const borderColor = useThemeColor({ light: lightColor, dark: darkColor }, 'borderColor');
@@ -43,21 +43,21 @@ export function TextInput(props: TextInputProps) {
   return <DefaultTextInput placeholderTextColor={color} style={[{ color, borderColor }, style]} {...otherProps} />;
 }
 
-export function View(props: ViewProps) {
+export const View = (props: ViewProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
-export function Modal(props: ModalProps) {
+export const Modal = (props: ModalProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
   return <DefaultModal style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
-export function ItemContainer(props: ViewProps) {
+export const ItemContainer = (props: ViewProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
   const borderColor = useThemeColor({ light: lightColor, dark: darkColor }, 'borderColor');

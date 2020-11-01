@@ -52,7 +52,7 @@ const Item = (props: { elem: itemInterface, onPress: () => void }) => {
     )
 }
 
-export default function ContentHandler(props: ContentProps) {
+const ContentHandler = (props: ContentProps) => {
 
     //Component state
     const { query, dataAttib, onSeletedTypeName } = props
@@ -89,7 +89,7 @@ export default function ContentHandler(props: ContentProps) {
 
     // State Handlers
 
-    function resetSearch() {
+    const resetSearch = () => {
         setFilter('')
         setQueryOptions((currentState: queryOptionsInterface) => {
             return { ...currentState, [onSeletedTypeName]: '', page: 1 }
@@ -97,7 +97,7 @@ export default function ContentHandler(props: ContentProps) {
         setDataQuery([])
     }
 
-    function handleFilter(text: string) {
+    const handleFilter = (text: string) => {
         setFilter(text)
         if (text === "") {
             setQueryOptions((currentState: queryOptionsInterface) => {
@@ -107,7 +107,7 @@ export default function ContentHandler(props: ContentProps) {
         }
     }
 
-    function handleNextPage() {
+    const handleNextPage = () => {
         if (data && data[dataAttib] && data[dataAttib].info) {
             if (data[dataAttib].info.next !== null) {
                 console.log(data[dataAttib].info.next)
@@ -118,11 +118,11 @@ export default function ContentHandler(props: ContentProps) {
         }
     }
 
-    function handleDetailsItem() {
+    const handleDetailsItem = () => {
         setModalVisible(currentState => !currentState)
     }
 
-    function handleSelectedItem(e: itemInterface) {
+    const handleSelectedItem = (e: itemInterface) => {
         setSelectedItem(e)
         handleDetailsItem()
     }
@@ -211,6 +211,8 @@ export default function ContentHandler(props: ContentProps) {
 
     )
 }
+
+export default ContentHandler;
 
 const styles = StyleSheet.create({
     container: {
