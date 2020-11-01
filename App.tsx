@@ -15,12 +15,12 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-    const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme();
 
-    return (
-      <ApolloProvider client={client}>
-          <StatusBar/>
-          <Navigation colorScheme={colorScheme} />
-      </ApolloProvider>
-    )
+  return (
+    <ApolloProvider client={client}>
+      <StatusBar />
+      <Navigation colorScheme={colorScheme} />
+    </ApolloProvider>
+  )
 }

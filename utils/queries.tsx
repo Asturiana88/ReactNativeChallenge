@@ -21,7 +21,7 @@ query($name:String, $page:Int, $type:String ){
 }
 `
 
-export const LOCATIONS_QUERY = gql `
+export const LOCATIONS_QUERY = gql`
 query($name:String, $page:Int){
   locations(filter:{name:$name}, page:$page){
     info{
@@ -40,7 +40,7 @@ query($name:String, $page:Int){
 }
 `
 
-export const EPISODES_QUERY = gql `
+export const EPISODES_QUERY = gql`
 query($name:String, $page:Int){
   episodes(filter:{name:$name}, page:$page){
     info{

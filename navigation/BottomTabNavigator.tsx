@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import CharactersScreen from '../screens/CharactersScreen';
@@ -16,9 +16,9 @@ export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator 
+    <BottomTab.Navigator
       //initialRouteName="LandingPage"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint, tabStyle:{padding:10}, labelStyle:{fontSize:18}}}>
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint, tabStyle: { padding: 10 }, labelStyle: { fontSize: 18 } }}>
       <BottomTab.Screen
         name="Characters"
         component={CharactersScreen}
@@ -29,16 +29,16 @@ export default function BottomTabNavigator() {
 
       />
       <BottomTab.Screen
-      name="Locations"
-      component={LocationsScreen}
-    />
+        name="Locations"
+        component={LocationsScreen}
+      />
     </BottomTab.Navigator>
   );
 }
 
 const styles = StyleSheet.create({
-  bottomBtn:{
-    alignItems:"center",
+  bottomBtn: {
+    alignItems: "center",
     display: "flex",
   }
 })
