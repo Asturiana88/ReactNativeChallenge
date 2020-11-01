@@ -40,17 +40,15 @@ interface queryOptionsInterface {
 }
 
 interface itemProps { elem: itemInterface, onPress: () => void }
-const Item = ({ elem, onPress }: itemProps) => {
-    return (
-        <TouchableOpacity onPress={onPress}>
-            <ItemContainer style={styles.itemContainer}>
-                {elem.image && <Image style={styles.image} source={{ uri: elem.image }} />}
-                <Text style={styles.textImg}> {elem.name} </Text>
-            </ItemContainer>
-        </TouchableOpacity>
+const Item = ({ elem, onPress }: itemProps) => (
+    <TouchableOpacity onPress={onPress}>
+        <ItemContainer style={styles.itemContainer}>
+            {elem.image && <Image style={styles.image} source={{ uri: elem.image }} />}
+            <Text style={styles.textImg}> {elem.name} </Text>
+        </ItemContainer>
+    </TouchableOpacity>
 
-    )
-}
+)
 
 const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) => {
 
@@ -129,9 +127,9 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
 
     // List Item
 
-    const renderItem = (elem: { item: itemInterface }) => {
-        return <Item elem={elem.item} onPress={() => handleSelectedItem(elem.item)} />
-    }
+    const renderItem = (elem: { item: itemInterface }) => (
+        <Item elem={elem.item} onPress={() => handleSelectedItem(elem.item)} />
+    )
 
     return (
         <View>
