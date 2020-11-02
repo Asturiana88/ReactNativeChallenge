@@ -16,7 +16,6 @@ const client = new ApolloClient({
 
 const App = () => {
   const colorScheme = useColorScheme();
-
   return (
     <ApolloProvider client={client}>
       <StatusBar />

@@ -146,7 +146,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
                             style={styles.flatListContainer}
                             data={dataQuery}
                             renderItem={renderItem}
-                            keyExtractor={(item: itemInterface) => item.id + item.name}
+                            keyExtractor={(item: itemInterface) => `${item.id}${item.name}`}
                         />
                 }
                 {loading &&
@@ -176,7 +176,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
                                     {selectedItem.residents.map((resident: { name: string, image: string }, i: number) => {
                                         if (i < 5) {
                                             return (
-                                                <ItemContainer key={resident.name + 'residentItem' + i} style={styles.containerModal}>
+                                                <ItemContainer key={`${resident.name} residentItem i`} style={styles.containerModal}>
                                                     <Image style={styles.imgContainerModal} source={{ uri: resident.image }} />
                                                     <Text style={styles.itemText}>{resident.name}</Text>
                                                 </ItemContainer>
@@ -189,7 +189,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
                             {selectedItem.characters ? selectedItem.characters.map((character: { name: string, image: string }, i: number) => {
                                 if (i < 5) {
                                     return (
-                                        <ItemContainer key={character.name + 'charatcterItem' + i} style={styles.containerModal}>
+                                        <ItemContainer key={`${character.name} charatcterItem i`} style={styles.containerModal}>
                                             <Image style={styles.imgContainerModal} source={{ uri: character.image }} />
                                             <Text style={styles.itemText} >{character.name}</Text>
                                         </ItemContainer>
