@@ -15,12 +15,14 @@ interface itemInterface {
     image?: string,
     dimension?: string,
     residents?: [{
+        id?: number,
         name: string,
         image: string
     }],
     episode?: string,
     air_date?: string,
     characters?: [{
+        id?: number,
         name: string,
         image: string
     }]
@@ -108,7 +110,6 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     const handleNextPage = () => {
         if (data && data[dataAttib] && data[dataAttib].info) {
             if (data[dataAttib].info.next !== null) {
-                console.log(data[dataAttib].info.next)
                 setQueryOptions((currentState: queryOptionsInterface) => {
                     return { ...currentState, page: data[dataAttib].info.next }
                 })
@@ -130,6 +131,55 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     const renderItem = (entity: { item: itemInterface }) => (
         <Item entity={entity.item} onPress={() => handleSelectedEntity(entity.item)} />
     )
+
+    const renderFirstFiveChars = (characters: { name: string, image: string }[]) => {
+        if (characters.length > 0 && characters[0].name) {
+            return characters.map((resident: { name: string, image: string }, i: number) => {
+                if (i < 5) {
+                    return (
+                        <ItemContainer key={`${resident.name} residentItem ${i}`} style={styles.containerModal}>
+                            <Image style={styles.imgContainerModal} source={{ uri: resident.image }} />
+                            <Text style={styles.itemText}>{resident.name}</Text>
+                        </ItemContainer>
+                    )
+                }
+            })
+        }
+        return (
+            <Text>No Characters found</Text>
+        )
+    }
+
+    const renderEntityDetails = () => {
+        if (selectedEntity.dimension && selectedEntity.residents) {
+            return (
+                <View>
+                    <Text>Type: {selectedEntity.type}</Text>
+                    <Text>Dimension: {selectedEntity.dimension}</Text>
+                    <View style={{ width: '100%' }}>
+                        <Text>Residents:</Text>
+                        {renderFirstFiveChars(selectedEntity.residents)}
+                    </View>
+                </View>
+            )
+        } else if (selectedEntity.air_date && selectedEntity.characters) {
+            return (
+                <View>
+                    <Text>Release Date: {selectedEntity.air_date} </Text>
+                    <Text>Episode: {selectedEntity.episode}</Text>
+                    <Text>Characters:</Text>
+                    {renderFirstFiveChars(selectedEntity.characters)}
+                </View>
+            )
+        }
+        return (
+            <View>
+                <Text>Type: {selectedEntity.type || " - "}</Text>
+                <Text>Gender: {selectedEntity.gender}</Text>
+                <Text>Specie: {selectedEntity.species}</Text>
+            </View>
+        )
+    }
 
     return (
         <View>
@@ -163,49 +213,13 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
                         <View >
                             <Text style={styles.itemTextTitle}>{selectedEntity.name}</Text>
                         </View>
-                        <View>
-                            {selectedEntity.type ? <Text>Type: {selectedEntity.type}</Text> : null}
-                            {selectedEntity.air_date ? <Text>Release Date: {selectedEntity.air_date}</Text> : null}
-                            {selectedEntity.gender ? <Text>Gender: {selectedEntity.gender}</Text> : null}
-                            {selectedEntity.species ? <Text>Specie: {selectedEntity.species}</Text> : null}
-                            {selectedEntity.dimension ? <Text>Dimension: {selectedEntity.dimension}</Text> : null}
-                            {selectedEntity.episode ? <Text>Episode: {selectedEntity.episode}</Text> : null}
-                            {selectedEntity.residents ?
-                                <View style={{ width: '100%' }}>
-                                    <Text>Characters:</Text>
-                                    {selectedEntity.residents.map((resident: { name: string, image: string }, i: number) => {
-                                        if (i < 5) {
-                                            return (
-                                                <ItemContainer key={`${resident.name} residentItem i`} style={styles.containerModal}>
-                                                    <Image style={styles.imgContainerModal} source={{ uri: resident.image }} />
-                                                    <Text style={styles.itemText}>{resident.name}</Text>
-                                                </ItemContainer>
-                                            )
-                                        }
-                                    })}
-                                </View>
-                                : null
-                            }
-                            {selectedEntity.characters ? selectedEntity.characters.map((character: { name: string, image: string }, i: number) => {
-                                if (i < 5) {
-                                    return (
-                                        <ItemContainer key={`${character.name} charatcterItem i`} style={styles.containerModal}>
-                                            <Image style={styles.imgContainerModal} source={{ uri: character.image }} />
-                                            <Text style={styles.itemText} >{character.name}</Text>
-                                        </ItemContainer>
-                                    )
-                                }
-                            })
-                                : null
-                            }
-                        </View>
-
+                        {renderEntityDetails()}
                     </View>
                 </Modal>
 
 
             </SafeAreaView >
-        </View>
+        </View >
 
     )
 }
