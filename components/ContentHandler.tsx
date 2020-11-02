@@ -26,7 +26,7 @@ interface itemInterface {
     }]
 }
 
-interface ContentProps {
+interface Props {
     query: DocumentNode,
     dataAttib: string,
     onSeletedTypeName: "name" | "type",
@@ -50,7 +50,7 @@ const Item = ({ entity, onPress }: itemProps) => (
 
 )
 
-const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) => {
+const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
 
     //Component state
 
