@@ -39,12 +39,12 @@ interface queryOptionsInterface {
     page: number
 }
 
-interface itemProps { elem: itemInterface, onPress: () => void }
-const Item = ({ elem, onPress }: itemProps) => (
+interface itemProps { entity: itemInterface, onPress: () => void }
+const Item = ({ entity, onPress }: itemProps) => (
     <TouchableOpacity onPress={onPress}>
         <ItemContainer style={styles.itemContainer}>
-            {elem.image && <Image style={styles.image} source={{ uri: elem.image }} />}
-            <Text style={styles.textImg}> {elem.name} </Text>
+            {entity.image && <Image style={styles.image} source={{ uri: entity.image }} />}
+            <Text style={styles.textImg}> {entity.name} </Text>
         </ItemContainer>
     </TouchableOpacity>
 
@@ -57,7 +57,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
     const [seletedTypeName, setSeletedTypeName] = useState<"name" | "type">("name")
     const [filter, setFilter] = useState<string>('')
     const [modalVisible, setModalVisible] = useState<boolean>(false);
-    const [selectedItem, setSelectedItem] = useState<itemInterface>({ name: '', id: 0 })
+    const [selectedEntity, setSelectedEntity] = useState<itemInterface>({ name: '', id: 0 })
     const [dataQuery, setDataQuery] = useState<itemInterface[] | []>([])
     const [variables, setQueryOptions] = useState<queryOptionsInterface>({
         name: "",
@@ -116,19 +116,19 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
         }
     }
 
-    const handleDetailsItem = () => {
+    const handleDetailsEntity = () => {
         setModalVisible(currentState => !currentState)
     }
 
-    const handleSelectedItem = (e: itemInterface) => {
-        setSelectedItem(e)
-        handleDetailsItem()
+    const handleSelectedEntity = (e: itemInterface) => {
+        setSelectedEntity(e)
+        handleDetailsEntity()
     }
 
     // List Item
 
-    const renderItem = (elem: { item: itemInterface }) => (
-        <Item elem={elem.item} onPress={() => handleSelectedItem(elem.item)} />
+    const renderItem = (entity: { item: itemInterface }) => (
+        <Item entity={entity.item} onPress={() => handleSelectedEntity(entity.item)} />
     )
 
     return (
@@ -158,22 +158,22 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
 
                 <Modal presentationStyle='overFullScreen' visible={modalVisible}>
                     <View style={styles.modalContainer} >
-                        <Button color="red" title="Back to results" onPress={handleDetailsItem} />
-                        {selectedItem.image && <Image style={styles.modalImg} source={{ uri: selectedItem.image }} />}
+                        <Button color="red" title="Back to results" onPress={handleDetailsEntity} />
+                        {selectedEntity.image && <Image style={styles.modalImg} source={{ uri: selectedEntity.image }} />}
                         <View >
-                            <Text style={styles.itemTextTitle}>{selectedItem.name}</Text>
+                            <Text style={styles.itemTextTitle}>{selectedEntity.name}</Text>
                         </View>
                         <View>
-                            {selectedItem.type ? <Text>Type: {selectedItem.type}</Text> : null}
-                            {selectedItem.air_date ? <Text>Release Date: {selectedItem.air_date}</Text> : null}
-                            {selectedItem.gender ? <Text>Gender: {selectedItem.gender}</Text> : null}
-                            {selectedItem.species ? <Text>Specie: {selectedItem.species}</Text> : null}
-                            {selectedItem.dimension ? <Text>Dimension: {selectedItem.dimension}</Text> : null}
-                            {selectedItem.episode ? <Text>Episode: {selectedItem.episode}</Text> : null}
-                            {selectedItem.residents ?
+                            {selectedEntity.type ? <Text>Type: {selectedEntity.type}</Text> : null}
+                            {selectedEntity.air_date ? <Text>Release Date: {selectedEntity.air_date}</Text> : null}
+                            {selectedEntity.gender ? <Text>Gender: {selectedEntity.gender}</Text> : null}
+                            {selectedEntity.species ? <Text>Specie: {selectedEntity.species}</Text> : null}
+                            {selectedEntity.dimension ? <Text>Dimension: {selectedEntity.dimension}</Text> : null}
+                            {selectedEntity.episode ? <Text>Episode: {selectedEntity.episode}</Text> : null}
+                            {selectedEntity.residents ?
                                 <View style={{ width: '100%' }}>
                                     <Text>Characters:</Text>
-                                    {selectedItem.residents.map((resident: { name: string, image: string }, i: number) => {
+                                    {selectedEntity.residents.map((resident: { name: string, image: string }, i: number) => {
                                         if (i < 5) {
                                             return (
                                                 <ItemContainer key={`${resident.name} residentItem i`} style={styles.containerModal}>
@@ -186,7 +186,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: ContentProps) =
                                 </View>
                                 : null
                             }
-                            {selectedItem.characters ? selectedItem.characters.map((character: { name: string, image: string }, i: number) => {
+                            {selectedEntity.characters ? selectedEntity.characters.map((character: { name: string, image: string }, i: number) => {
                                 if (i < 5) {
                                     return (
                                         <ItemContainer key={`${character.name} charatcterItem i`} style={styles.containerModal}>
