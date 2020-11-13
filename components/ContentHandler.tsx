@@ -58,7 +58,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
 
     const [seletedTypeName, setSeletedTypeName] = useState<"name" | "type">("name")
     const [filter, setFilter] = useState<string>('')
-    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [modalVisibility, setModalVisibility] = useState<boolean>(false);
     const [selectedEntity, setSelectedEntity] = useState<itemInterface>({ name: '', id: 0 })
     const [dataQuery, setDataQuery] = useState<itemInterface[] | []>([])
     const [variables, setQueryOptions] = useState<queryOptionsInterface>({
@@ -118,7 +118,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     }
 
     const handleDetailsEntity = () => {
-        setModalVisible(currentState => !currentState)
+        setModalVisibility(currentState => !currentState)
     }
 
     const handleSelectedEntity = (e: itemInterface) => {
@@ -206,7 +206,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
                 }
 
 
-                <Modal presentationStyle='overFullScreen' visible={modalVisible}>
+                <Modal presentationStyle='overFullScreen' visible={modalVisibility}>
                     <View style={styles.modalContainer} >
                         <Button color="red" title="Back to results" onPress={handleDetailsEntity} />
                         {selectedEntity.image && <Image style={styles.modalImg} source={{ uri: selectedEntity.image }} />}
