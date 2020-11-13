@@ -184,7 +184,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     return (
         <View>
             <View style={styles.inputTextContainer} >
-                <TextInput style={styles.inputText} placeholder="Ingrese busqueda.." onChangeText={handleFilter} value={filter} />
+                <TextInput style={styles.inputText} placeholder="Search..." onChangeText={handleFilter} value={filter} />
             </View>
             <SafeAreaView >
                 {
