@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { View, Text, ItemContainer, TextInput, Modal } from './Themed';
 
-interface itemInterface {
+interface entityProps {
     id: number,
     name: string,
     type?: string,
@@ -41,7 +41,7 @@ interface queryOptionsInterface {
     page: number
 }
 
-interface itemProps { entity: itemInterface, onPress: () => void }
+interface itemProps { entity: entityProps, onPress: () => void }
 const Item = ({ entity, onPress }: itemProps) => (
     <TouchableOpacity onPress={onPress}>
         <ItemContainer style={styles.itemContainer}>
@@ -59,8 +59,8 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     const [seletedTypeName, setSeletedTypeName] = useState<"name" | "type">("name")
     const [filter, setFilter] = useState<string>('')
     const [modalVisibility, setModalVisibility] = useState<boolean>(false);
-    const [selectedEntity, setSelectedEntity] = useState<itemInterface>({ name: '', id: 0 })
-    const [dataQuery, setDataQuery] = useState<itemInterface[] | []>([])
+    const [selectedEntity, setSelectedEntity] = useState<entityProps>({ name: '', id: 0 })
+    const [dataQuery, setDataQuery] = useState<entityProps[] | []>([])
     const [variables, setQueryOptions] = useState<queryOptionsInterface>({
         name: "",
         type: "",
@@ -80,7 +80,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
             setDataQuery([])
         }
         if (data && data[dataAttib] && data[dataAttib].results) {
-            let itemList: itemInterface[] | [] = data[dataAttib].results
+            let itemList: entityProps[] | [] = data[dataAttib].results
             if (dataQuery !== itemList) {
                 setDataQuery(currentData => [...currentData, ...itemList])
             }
@@ -121,14 +121,14 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
         setModalVisibility(currentState => !currentState)
     }
 
-    const handleSelectedEntity = (e: itemInterface) => {
+    const handleSelectedEntity = (e: entityProps) => {
         setSelectedEntity(e)
         handleDetailsEntity()
     }
 
     // List Item
 
-    const renderItem = (entity: { item: itemInterface }) => (
+    const renderItem = (entity: { item: entityProps }) => (
         <Item entity={entity.item} onPress={() => handleSelectedEntity(entity.item)} />
     )
 
@@ -196,7 +196,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
                             style={styles.flatListContainer}
                             data={dataQuery}
                             renderItem={renderItem}
-                            keyExtractor={(item: itemInterface) => `${item.id}${item.name}`}
+                            keyExtractor={(item: entityProps) => `${item.id}${item.name}`}
                         />
                 }
                 {loading &&
