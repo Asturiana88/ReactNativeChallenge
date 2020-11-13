@@ -74,9 +74,9 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
 
     useEffect(() => {
         if (filter.length > 2) {
-            setQueryOptions((currentState: queryOptionsInterface) => {
-                return { ...currentState, [onSeletedTypeName]: filter, page: 1 }
-            })
+            setQueryOptions((currentState: queryOptionsInterface) => (
+                { ...currentState, [onSeletedTypeName]: filter, page: 1 }
+            ))
             setDataQuery([])
         }
         if (data && data[dataAttib] && data[dataAttib].results) {
@@ -91,18 +91,18 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
 
     const resetSearch = () => {
         setFilter('')
-        setQueryOptions((currentState: queryOptionsInterface) => {
-            return { ...currentState, [onSeletedTypeName]: '', page: 1 }
-        })
+        setQueryOptions((currentState: queryOptionsInterface) => (
+            { ...currentState, [onSeletedTypeName]: '', page: 1 }
+        ))
         setDataQuery([])
     }
 
     const handleFilter = (text: string) => {
         setFilter(text)
         if (text === "") {
-            setQueryOptions((currentState: queryOptionsInterface) => {
-                return { ...currentState, [onSeletedTypeName]: '', page: 1 }
-            })
+            setQueryOptions((currentState: queryOptionsInterface) => (
+                { ...currentState, [onSeletedTypeName]: '', page: 1 }
+            ))
             setDataQuery([])
         }
     }
@@ -110,9 +110,9 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     const handleNextPage = () => {
         if (data && data[dataAttib] && data[dataAttib].info) {
             if (data[dataAttib].info.next !== null) {
-                setQueryOptions((currentState: queryOptionsInterface) => {
-                    return { ...currentState, page: data[dataAttib].info.next }
-                })
+                setQueryOptions((currentState: queryOptionsInterface) => (
+                    { ...currentState, page: data[dataAttib].info.next }
+                ))
             }
         }
     }
