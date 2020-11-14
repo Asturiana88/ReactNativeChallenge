@@ -41,8 +41,8 @@ interface queryOptionsInterface {
     page: number
 }
 
-interface itemProps { entity: entityProps, onPress: () => void }
-const Item = ({ entity, onPress }: itemProps) => (
+interface listEntityItemProps { entity: entityProps, onPress: () => void }
+const EntityItem = ({ entity, onPress }: listEntityItemProps) => (
     <TouchableOpacity onPress={onPress}>
         <ItemContainer style={styles.itemContainer}>
             {entity.image && <Image style={styles.image} source={{ uri: entity.image }} />}
@@ -129,7 +129,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     // List Item
 
     const renderItem = (entity: { item: entityProps }) => (
-        <Item entity={entity.item} onPress={() => handleSelectedEntity(entity.item)} />
+        <EntityItem entity={entity.item} onPress={() => handleSelectedEntity(entity.item)} />
     )
 
     const renderFirstFiveChars = (characters: { name: string, image: string }[]) => {
