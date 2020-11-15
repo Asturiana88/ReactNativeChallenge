@@ -60,7 +60,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     const [filter, setFilter] = useState<string>('')
     const [modalVisibility, setModalVisibility] = useState<boolean>(false);
     const [selectedEntity, setSelectedEntity] = useState<entityProps>({ name: '', id: 0 })
-    const [dataQuery, setDataQuery] = useState<entityProps[] | []>([])
+    const [entityList, setEntityList] = useState<entityProps[] | []>([])
     const [variables, setQueryOptions] = useState<queryOptionsInterface>({
         name: "",
         type: "",
@@ -77,12 +77,12 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
             setQueryOptions((currentState: queryOptionsInterface) => (
                 { ...currentState, [onSeletedTypeName]: filter, page: 1 }
             ))
-            setDataQuery([])
+            setEntityList([])
         }
         if (data && data[dataAttib] && data[dataAttib].results) {
             let itemList: entityProps[] | [] = data[dataAttib].results
-            if (dataQuery !== itemList) {
-                setDataQuery(currentData => [...currentData, ...itemList])
+            if (entityList !== itemList) {
+                setEntityList(currentData => [...currentData, ...itemList])
             }
         }
     }, [data, filter])
@@ -91,7 +91,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
 
     const resetSearch = () => {
         setFilter('')
-        setDataQuery([])
+        setEntityList([])
         setQueryOptions((currentState: queryOptionsInterface) => (
             { ...currentState, [onSeletedTypeName]: '', page: 1 }
         ))
@@ -100,7 +100,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
     const handleFilter = (text: string) => {
         setFilter(text)
         if (text === "") {
-            setDataQuery([])
+            setEntityList([])
             setQueryOptions((currentState: queryOptionsInterface) => (
                 { ...currentState, [onSeletedTypeName]: '', page: 1 }
             ))
@@ -188,13 +188,13 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
             </View>
             <SafeAreaView >
                 {
-                    error && dataQuery.length < 1 ?
+                    error && entityList.length < 1 ?
                         <NotFoundScreen resetSearch={resetSearch} />
-                        : dataQuery &&
+                        : entityList &&
                         <FlatList
                             onEndReached={handleNextPage}
                             style={styles.flatListContainer}
-                            data={dataQuery}
+                            data={entityList}
                             renderItem={renderItem}
                             keyExtractor={(item: entityProps) => `${item.id}`}
                         />
