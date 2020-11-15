@@ -91,19 +91,19 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
 
     const resetSearch = () => {
         setFilter('')
+        setDataQuery([])
         setQueryOptions((currentState: queryOptionsInterface) => (
             { ...currentState, [onSeletedTypeName]: '', page: 1 }
         ))
-        setDataQuery([])
     }
 
     const handleFilter = (text: string) => {
         setFilter(text)
         if (text === "") {
+            setDataQuery([])
             setQueryOptions((currentState: queryOptionsInterface) => (
                 { ...currentState, [onSeletedTypeName]: '', page: 1 }
             ))
-            setDataQuery([])
         }
     }
 
@@ -196,7 +196,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
                             style={styles.flatListContainer}
                             data={dataQuery}
                             renderItem={renderItem}
-                            keyExtractor={(item: entityProps) => `${item.id}${item.name}`}
+                            keyExtractor={(item: entityProps) => `${item.id}`}
                         />
                 }
                 {loading &&

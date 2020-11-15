@@ -31,6 +31,7 @@ query($name:String, $page:Int){
       prev
     }
     results{
+      id
       name
       type
       dimension
