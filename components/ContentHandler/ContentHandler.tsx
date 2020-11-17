@@ -191,7 +191,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
                 {
                     error && entityList.length < 1 ?
                         <NotFoundScreen resetSearch={resetSearch} />
-                        : entityList &&
+                        : entityList != [] &&
                         <FlatList
                             onEndReached={handleNextPage}
                             style={styles.flatListContainer}
@@ -210,7 +210,7 @@ const ContentHandler = ({ query, dataAttib, onSeletedTypeName }: Props) => {
                 <Modal presentationStyle='overFullScreen' visible={modalVisibility}>
                     <View style={styles.modalContainer} >
                         <Button color="red" title="Back to results" onPress={handleDetailsEntity} />
-                        {selectedEntity.image && <Image style={styles.modalImg} source={{ uri: selectedEntity.image }} />}
+                        {selectedEntity.image != null && <Image style={styles.modalImg} source={{ uri: selectedEntity.image }} />}
                         <View >
                             <Text style={styles.itemTextTitle}>{selectedEntity.name}</Text>
                         </View>
