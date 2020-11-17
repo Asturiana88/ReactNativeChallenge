@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, Button, Image } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { Button, Image } from 'react-native';
+import { Text, View } from '../../components/Themed';
+import styles from './styles';
 
 interface Props { resetSearch: () => void }
 
@@ -17,26 +18,4 @@ const NotFoundScreen = ({ resetSearch }: Props) => (
 );
 
 export default NotFoundScreen;
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 5,
-    padding: 35
-  },
-  buttonContainer: {
-    marginTop: 15,
-  },
-  errorText: {
-    fontSize: 25,
-    fontWeight: "bold"
-  },
-  imgNF: {
-    borderRadius: 30,
-    width: '100%',
-    maxHeight: 400,
-    height: '100%'
-  },
-  imgContainer: {
-    marginTop: 10,
-    padding: 15
-  }
-});
+

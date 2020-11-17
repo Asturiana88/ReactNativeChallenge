@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ContentHandler from '../components/ContentHandler';
+import ContentHandler from '../components/ContentHandler/ContentHandler';
 import { CHARACTERS_QUERY } from "../utils/queries";
 
 const CharactersScreen = () => (
